@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>JavaScript fin 2016 • Christophe Porteneuve @ Nocturnes FedeRez 2016</title>
+    <meta name="author" content="Christophe Porteneuve">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme-basis">
+    <link rel="stylesheet" href="css/theme/js-total.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/prism.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.type = 'text/css'
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css'
+      document.getElementsByTagName('head')[0].appendChild(link)
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section id="intro">
+          <h1>JS fin 2016</h1>
+          <h3>Épisode 1 : le langage</h3>
+          <p>
+            <small>Une présentation de Christophe Porteneuve à <a href="https://nocturnes.federez.net/">Nocturnes FedeRez 2016</a></small>
+          </p>
+        </section>
+
+        <section id="whoami">
+          <h2>whoami</h2>
+
+          <pre><code data-trim class="language-js">
+const christophe = {
+  family:     { wife: 'Élodie', son: 'Maxence' },
+  city:       'Paris, FR',
+  company:    'Delicious Insights',
+  trainings:  ['JS Total', 'Node.js', 'Git Total'],
+  jsSince:    1995,
+  claimsToFame: [
+    'Prototype.js',
+    'script.aculo.us',
+    'JS Attitude',
+    'Bien Développer pour le Web 2.0',
+    'NodeSchool Paris'
+  ]
+}
+          </code></pre>
+        </section>
+
+        <section id="history">
+          <h2>D’ES3 à ES2017</h2>
+
+          <table>
+            <tbody>
+              <tr>
+                <td>mai 1995</td>
+                <td>JS 1.0 (en 10 jours). Netscape 2.0ß3 en 12/95.</td>
+              </tr>
+              <tr>
+                <td>juin 1997</td>
+                <td>ECMAScript (ES1, ECMA-262), standard officiel</td>
+              </tr>
+              <tr>
+                <td>déc. 1999</td>
+                <td><strong>ES3</strong>.  JScript 1.5 à peu près à ce niveau (IE4–8)</td>
+              </tr>
+              <tr>
+                <td>déc. 2009 (!)</td>
+                <td><strong>ES5</strong>.  <em>Baseline</em> de compat’ actuelle. IE9+, Node, etc.  Peu de gros changements.</td>
+              </tr>
+              <tr>
+                <td>juin 2015</td>
+                <td><strong>ES2015</strong> / ES6.  <strong>Énormément</strong> de nouveautés de <strong>langage pur</strong>.</td>
+              </tr>
+              <tr>
+                <td>juin 2016</td>
+                <td>ES2016 (versions annuelles désormais, dans le cadre d’ES.Next). Peu de choses.</td>
+              </tr>
+              <tr>
+                <td>juin 2017</td>
+                <td><strong>ES2017</strong>. async/await, trailing commas, Rest/Spread properties, async iterators…</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="support">
+          <h2>Prise en charge native ?</h2>
+
+          <p>
+            <a href="https://kangax.github.io/compat-table/es6/">La table de compat’ de Juriy “Kangax” Zaytsev</a>.
+          </p>
+
+          <h3>Navigateurs</h3>
+
+          <p>Evergreens <strong>de 90% à 100%</strong>.</p>
+
+          <h3>Serveurs</h3>
+
+          <p>Node 4.x à 52%, Node 5.x à 58%, Node LTS 6 à <strong>99%</strong> !</p>
+
+          <h3>Mais sinon…?</h3>
+
+          <p>Évidemment il reste IE (9–11), et puis même 58% ça reste insuffisant tel quel pour être serein·e…  Alors on fait quoi, si on doit gérer ça ?</p>
+        </section>
+
+        <section id="babel" data-background="images/babel-logo.svg" data-background-size="100%">
+          <h2>Babel</h2>
+
+          <div class="translucent">
+            <p>Transpile ES6+<sup>1</sup> (ES6, ES7…) en <strong>ES5</strong></p>
+            <p>Du coup, <strong>si tu as ES5, tu peux y aller</strong></p>
+            <p>En pratique : IE9+, evergreens, tous les Node.js / io.js</p>
+            <p>Y’a même une partie qu’on pourrait transpiler en ES3… o_O</p>
+            <p>Intégré avec <a href="http://babeljs.io/docs/setup/"><strong>l’univers</strong></a></p>
+          </div>
+
+          <footer><sup>1</sup> Quasi tout… mais pas les proxies.</footer>
+        </section>
+
+        <section id="why-es6">
+          <h2>ES2015+, pourquoi ?</h2>
+
+          <p>Plus <strong>facile</strong></p>
+          <p>Plus <strong>puissant</strong></p>
+          <p>Plus <strong>fiable</strong></p>
+          <p>Plus <strong>performant</strong></p>
+          <h3 class="fragment breathing">Plus <strong>kiffant</strong></h3>
+        </section>
+
+        <section>
+          <section id="objects-and-classes">
+            <h1>Objets &amp; Classes</h1>
+            <h3>Là c’est grave plus simple</h3>
+          </section>
+
+          <section id="object-literals">
+            <h2>Littéraux objets</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+res.render('entries/index', {
+  pageTitle: 'Les bookmarks', <u>entries, entryCount, tags</u>
+})
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+const coreReducer = combineReducers({
+  <u>currentUser, goals, history, today, todaysProgress</u>
+})
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+return { <u>[action.goalId]</u>: previous + increment }
+            </code></pre>
+
+            <footer><a href="http://babeljs.io/docs/learn-es2015/#enhanced-object-literals">Détails</a></footer>
+          </section>
+
+          <section id="classes">
+            <h2>Classes</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+<u>class</u> TodoItem <u>extends</u> Component {
+  <u>constructor</u> (props, context) {
+    <u>super</u>(props, context)
+    this.state = {
+      editing: false
+    }
+  }
+
+  <u>handleDoubleClick ()</u> {
+    this.setState({ editing: true })
+  }
+  …
+}
+            </code></pre>
+            <footer>
+              <a href="http://babeljs.io/docs/learn-es2015/#classes">Détails</a>
+              •
+              <a href="http://babeljs.io/repl/#?experimental=true&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;playground=false&amp;code=class%20TodoItem%20extends%20Component%20%7B%0A%20%20constructor(props%2C%20context)%20%7B%0A%20%20%20%20super(props%2C%20context)%3B%0A%20%20%20%20this.state%20%3D%20%7B%0A%20%20%20%20%20%20editing%3A%20false%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20handleDoubleClick()%20%7B%0A%20%20%20%20this.setState(%7B%20editing%3A%20true%20%7D)%3B%0A%20%20%7D%0A%20%0A%7D" target="_blank">Voir sur Babel</a>
+            </footer>
+          </section>
+
+          <section id="classes-continued">
+            <h2>Classes (suite)</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+class TodoItem extends Component {
+  <u>static</u> MINIMUM_COMPLETION_TIME = 5
+
+  // obj.completionTime
+  <u>get</u> completionTime () {
+    return (this.checkedAt - this.startedAt) / 1000
+  }
+
+  // obj.completionTime = …
+  <u>set</u> completionTime (value) {
+    this.checkedAt = this.startedAt + Math.max(value, MINIMUM_COMPLETION_TIME) * 1000
+  }
+
+  cleanUp () {
+    <u>super.</u>cleanUp()
+    this.customState = null
+  }
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section id="greater-comfort">
+            <h1>Un confort énorme</h1>
+            <h3>sur plein de petits trucs</h3>
+          </section>
+
+          <section id="destructuring">
+            <h2>Déstructuration</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+const <u>{ activeCount } =</u> this.props
+…
+const { filter<u>: selectedFilter</u>, onShow } = this.props
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+const <u>[totalProgress, totalTarget] =</u> getDayCounts(todaysProgress, goals)
+…
+const <u>[, msgList, msgPane] =</u> output.props.children
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+function convertNode (<u>{ nodeType, nodeValue }</u>) {
+  switch (nodeType) {
+    case ELEMENT_NODE:
+      convertElementNode(nodeValue)
+      break
+    // …
+  }
+}
+            </code></pre>
+
+            <footer><a href="http://babeljs.io/docs/learn-es2015/#destructuring">Détails</a></footer>
+          </section>
+
+         <section id="destructuring-irl">
+            <h2 data-irl>Déstructuration</h2>
+
+            <pre data-keep-tags="u"><code class="language-js">
+const <u>[
+  endpoint = '/users/me',
+  output = 'response.json'
+]</u> = process.argv.slice(2)
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-js">
+const HistoryDayGoal = (<u>{ goal: { name, units }, stats: [progress, target] }</u>) => {
+  // …
+}
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-js">
+Promise.all([
+  Entry.tags(), Entry.count().exec(), Entry.getEntries(req.query)
+])
+.then((<u>[tags, entryCount, entries]</u>) => {
+  res.render('entries/index', { pageTitle: 'Les bookmarks', entries, entryCount, tags })
+})
+              </code></pre>
+          </section>
+
+          <section id="rest-spread">
+            <h2>Rest &amp; Spread</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+function winners(first, runnerUp, <u>...others</u>) {
+  console.log(first, runnerUp, others)
+}
+winners('alice', 'bob', 'claire', 'david')
+// => 'alice', 'bob', <u>['claire', 'david']</u>
+
+var arr1 = ['one', 'two']
+var arr2 = ['three', 'four']
+arr1.push(<u>...arr2</u>) // => 4
+arr1 // => ['one', 'two', 'three', 'four']
+
+var nodeListAsArray = <u>[...</u>document.querySelectorAll('h1')<u>]</u>
+
+var defaults = { first: 'John', last: 'Doe', age: 42 }
+var trainer = { last: 'Smith', age: 35 }
+trainer = { <u>...defaults</u>, <u>...trainer</u>, age: 36 }
+// => { first: 'John', last: 'Smith', age: 36 }
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+return <u>[</u>{ id: …, completed: …, text: … }<u>, ...state]</u>
+            </code></pre>
+
+            <footer>
+              Détails <a href="http://babeljs.io/docs/learn-es2015/#default-rest-spread">ES2015</a>
+              et <a href="https://github.com/sebmarkbage/ecmascript-rest-spread#readme">ES2017</a>
+            </footer>
+          </section>
+
+          <section id="defaults">
+            <h2>Valeurs par défaut</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+function todos (state<u> = initialState</u>, action) {
+  // …
+}
+
+function convertNode ({ nodeType <u>= ELEMENT_NODE</u>, nodeValue }) {
+  // …
+}
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+var [first, second<u> = 'foo'</u>] = ['yo']
+// second === 'foo'
+
+var person = { first: 'Louis', sex: 'M', age: 36 }
+var { first, last<u> = 'Doe'</u>, age<u> = 42</u> } = person
+// first === 'Louis', last === 'Doe', age === 36
+            </code></pre>
+            <footer><a href="http://babeljs.io/docs/learn-es2015/#default-rest-spread">Détails</a></footer>
+          </section>
+
+          <section id="template-strings">
+            <h2>Template strings</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+var person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' }
+
+// Interpolation de JS quelconque
+console.log(`<u>${person.first}</u> aka <u>${person.nickname}</u>`)
+// => 'Thomas aka Neo'
+
+// Multi-ligne !
+var markup = <u>`</u>&lt;li&gt;
+  ${person.first} ${person.last}, age ${person.age}
+&lt;/li&gt;<u>`</u>
+            </code></pre>
+
+            <footer><a href="http://babeljs.io/docs/learn-es2015/#template-strings">Détails</a></footer>
+          </section>
+
+          <section id="let-const">
+            <h2><code>let</code> &amp; <code>const</code></h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+<u>const</u> { activeCount } = this.props
+…
+<u>const</u> { filter: selectedFilter, onShow } = this.props
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+<u>const</u> ADD_TODO = 'ADD_TODO'
+<u>const</u> DELETE_TODO = 'DELETE_TODO'
+<u>const</u> EDIT_TODO = 'EDIT_TODO'
+            </code></pre>
+
+            <p>Portée : le bloc (même implicite)</p>
+
+            <pre><code data-keep-tags="u" class="language-js">
+for (<u>let</u> index = 0; index &lt; 10; ++index)
+  setTimeout(() => console.log(index), 10)
+  // => Effectivement de 0 à 9, pas 10 x 10, malgré l’asynchrone
+            </code></pre>
+
+            <p><q>“<code>const</code> is the new <code>var</code>”</q>.  <code>let</code> seulement si besoin.</p>
+
+            <footer><a href="http://babeljs.io/docs/learn-es2015/#let-const">Détails</a></footer>
+          </section>
+
+          <section id="const-shallow">
+            <h2><code>const</code> ≠ immutable</h2>
+
+            <p>Attention ! <code>const</code> n’est pas récursif / profond !</p>
+
+            <pre><code class="language-js">
+const author = { name: 'Bob', language: 'js' }
+author.language = 'es6'
+
+const days = ['tuesday', 'wednesday', 'thursday']
+days.push('friday')
+            </code></pre>
+
+            <p>Pour geler en profondeur, voir <a href="https://github.com/substack/deep-freeze">deep-freeze</a>.</p>
+
+            <footer>Dans le même univers : <a href="https://facebook.github.io/immutable-js/">Immutable.js</a>, <a href="http://swannodette.github.io/mori/">Mori</a>, <a href="http://redux.js.org/">Redux</a></footer>
+          </section>
+
+          <section id="new-literals">
+            <h2>Littéraux étendus</h2>
+
+            <p>Octaux et binaires (<code>052</code> ne marche plus en strict)</p>
+
+            <pre><code data-keep-tags="u" class="language-js">
+<u>0o</u>52     // => 42
+<u>0b</u>101010 // => 42
+            </code></pre>
+
+            <p>Encore plus d’Unicode</p>
+
+            <pre><code class="language-js">
+"𠮷".length == 2                      // Nombre de caractères, pas de codepoints
+
+"\u{20BB7}" == "𠮷" == "\uD842\uDFB7" // Nouvelle syntaxe d’échappement pour codepoint
+
+"𠮷".match(/./u)[0].length == 2       // Nouveau flag 'u' des regexp, change les classes
+
+"𠮷".codePointAt(0) == 0x20BB7        // Nouvelle API codePointAt (en plus de charCodeAt)
+            </code></pre>
+
+            <footer>
+              Détails pour les
+              <a href="http://babeljs.io/docs/learn-es2015/#binary-and-octal-literals">nombres</a> et
+              l’<a href="http://babeljs.io/docs/learn-es2015/#unicode">Unicode</a>
+            </footer>
+          </section>
+
+          <section id="arrow-functions">
+            <h2>Fonctions fléchées</h2>
+
+            <p>Ne redéfinit pas <code>this</code>*, qui reste donc lexical !</p>
+
+            <pre data-keep-tags="u"><code class="language-jsx">
+{goals.map(<u>(goal) =></u>
+&lt;GoalSetting key={goal.id} goal={goal}
+  onDeleteClick={<u>() => this.openGoalDeleter(goal)</u>}
+  onEditClick={<u>() => this.openGoalEditor(goal)</u>}
+/>
+)}
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-jsx">
+const mapStateToProps = <u>({ goals, currentUser }) => ({ goals, currentUser })</u>
+            </code></pre>
+
+            <p>Raccourcis possibles, idéal pour les prédicats, filtres, transfos…</p>
+
+            <pre data-keep-tags="u"><code class="language-js">
+[12, 18, 21, 23].map(<u>(hour) => [hour, 0, 0]</u>)
+            </code></pre>
+
+            <pre data-keep-tags="u"><code class="language-js">
+return state.map(<u>(goal) => goal.id === newGoal.id ? newGoal : goal</u>)
+            </code></pre>
+
+            <footer>
+              * Pas plus que <code>arguments</code>, <code>super</code> et <code>new.target</code>.  Une fonction fléchée ne peut donc être utilisée comme constructeur et s'abstient en général d'utiliser ces aspects
+              •
+              <a href="http://babeljs.io/docs/learn-es2015/#arrows-and-lexical-this">Détails</a>
+            </footer>
+          </section>
+
+          <section id="maps-and-sets">
+            <h2>Maps et Sets</h2>
+
+            <p>2 nouveaux types de collections.</p>
+
+            <pre><code data-keep-tags="u" class="language-js">
+const s = new <u>Set</u>()
+s<u>.add</u>('es6').add('défonce').add('es5').add('es6')
+s<u>.size</u>       // => 3
+s<u>.has</u>('es6') // => true
+
+const items = ['es6', 'défonce', 'es5', 'es6']
+[...new Set(items)] // => ['es6', 'défonce', 'es5']
+            </code></pre>
+
+            <pre><code data-keep-tags="u" class="language-js">
+const m = new <u>Map</u>()
+m.<u>set</u>('42', 'foobar')
+m<u>.get</u>('42') // => 'foobar'
+m.get(<u>42</u>)   // => undefined
+m<u>.has</u>(42)   // => false
+m<u>.size</u>      // => 1
+            </code></pre>
+
+            <footer><a href="http://es6-features.org/#SetDataStructure">Détails</a></footer>
+          </section>
+        </section>
+
+        <section>
+          <section id="async">
+            <h1>L’asynchrone</h1>
+            <h3>en version triviale</h3>
+          </section>
+
+          <section id="promises-not-just-callbacks">
+            <h2>Promesses ≠ Callbacks++</h2>
+
+            <h3 class="breathing">Trois forces principales</h3>
+
+            <p>Garanties d’appel unique et exclusif</p>
+            <p>Capture des exceptions / erreurs</p>
+            <p>Composabilité</p>
+
+            <h3 class="breathing">Largement répandu</h3>
+
+            <p>
+              Plein de libs pré-ES6, jqXHR, APIs web récentes…<br/>
+              <small>(ServiceWorker, Fetch, Streams, Push, Notification, Battery, etc.)</small>
+            </p>
+          </section>
+
+          <section id="promises-then">
+            <h2>Promesses : <code>then</code></h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+somePromise.then(value => processing)
+
+// Le traitement peut renvoyer une valeur fixe, qui sera promesse accomplie
+getJSON('/meta').then(res => <u>res.user_url</u>)
+// …ou renvoyer une autre promesse, qui s'incruste dans la chaîne
+getJSON('/')
+  .then(res => <u>getJSON(res.user_url)</u>)
+  .then(console.log)
+            </code></pre>
+
+            <p>Il y a en fait <strong>2</strong> arguments : les rappels de succès <strong>et d’erreur</strong></p>
+
+            <pre><code data-keep-tags="u" class="language-js">
+getJSON('/meta')
+  .then(res => getJSON(res.user_url))
+  .then(console.log<u>, console.error</u>)
+  .then(releaseConnection)
+            </code></pre>
+
+            <p>Dès qu’une erreur est consommée, elle est neutralisée<br/>
+              (comme un <code>try…catch</code>)</p>
+          </section>
+
+          <section id="promises-catch">
+            <h2>Promesses : <code>catch</code></h2>
+
+            <p>Attention à ne pas confondre les niveaux : 2 callbacks de même niveau sont <strong>mutuellement exclusifs</strong>.</p>
+
+            <pre><code class="language-js">
+getJSON(res.user_url).then(
+  res => res.fouleNayme.split('/'), // Erreur !
+  console.error // Jamais appelée
+)
+
+getJSON(res.user_url)
+  .then(res => res.fouleNayme.split('/')) // Erreur !
+  .then(console.log, console.error) // console.error appelée !
+            </code></pre>
+
+            <p><code>then(null, errorHandling)</code> c’est très moche…</p>
+
+            <pre><code data-keep-tags="u" class="language-js">
+getJSON(res.user_url)
+  .then(res => res.fouleNayme.split('/'))
+  .then(console.log)
+  <u>.catch</u>(console.error)
+            </code></pre>
+
+            <p>Super manière de les apprivoiser : <a href="http://bevacqua.github.io/promisees/">Promisees</a></p>
+
+            <footer>
+              <a href="http://babeljs.io/docs/learn-es2015/#promises">Détails</a> •
+              <a href="https://developers.google.com/web/fundamentals/getting-started/primers/promises">L’excellent tuto de Jake Archibald</a>
+            </footer>
+          </section>
+
+          <section id="async-functions">
+            <h2><code>async</code> / <code>await</code></h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+<u>async</u> function chainAnimationsAsync (elem, animations) {
+  let ret = null
+  try {
+    for (const anim of animations) {
+      ret = <u>await</u> anim(elem)
+    }
+  } catch (e) { /* ignore and keep going */ }
+  return ret
+}
+            </code></pre>
+
+           <pre><code data-keep-tags="u" class="language-js">
+<u>async</u> function processUserNotebook (request, response) {
+  try {
+    const user = <u>await</u> User.get(request.user)
+    const notebook = <u>await</u> Notebook.get(user.notebook)
+    response.send(<u>await</u> doSomethingAsync(user, notebook))
+  } catch (err) {
+    response.send(err)
+  }
+}
+            </code></pre>
+          </section>
+
+          <section id="async-functions-2">
+            <h2><code>async</code> / <code>await</code> (suite)</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+<u>async</u> function listEntries (request, response) {
+  try {
+    const [tags, entryCount, entries] = <u>await Promise.all</u>([
+      Entry.tags(),
+      Entry.count().exec(),
+      Entry.getEntries(req.query)
+    ])
+    res.render('entries/index', { pageTitle: 'Les bookmarks', entries, entryCount, tags })
+  } catch (err) {
+    req.flash('error', `Impossible d’afficher les bookmarks : ${err.message}`)
+    res.redirect('/')
+  }
+}
+            </code></pre>
+
+            <footer>
+              <a href="http://tc39.github.io/ecmascript-asyncawait/">Spec (ES2017)</a> •
+              <a href="https://developers.google.com/web/fundamentals/getting-started/primers/async-functions">Jake Archibald toujours</a> •
+              <a href="http://rossboucher.com/await/">Belle présentation de Ross Boucher</a>
+            </footer>
+          </section>
+        </section>
+
+        <section>
+          <section id="modules">
+            <h1>Des vrais modules</h1>
+            <h3>qui défoncent</h3>
+          </section>
+
+          <section id="exporting">
+            <h2>Exporter</h2>
+
+            <p>Niveau langage, donc analysables statiquement ; pas de soucis de dépendances circulaires grâce à l’export de <span lang="en">live bindings</span>.</p>
+
+            <p>Mode strict par défaut (comme les corps de classes).</p>
+
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <pre><code data-keep-tags="u" class="language-js">
+// Exports explicites, nommés, à la volée
+<u>export</u> function addTodo (text) {
+  return { type: types.ADD_TODO, text }
+}
+
+<u>export</u> const ADD_TODO = 'ADD_TODO'
+
+// Export par défaut (un seul par module)
+<u>export default</u> Footer
+
+// Exports a posteriori
+export { Component, Factory, makeHigherOrder }
+                    </code></pre>
+                  </td>
+                  <td>
+                    <pre><code data-keep-tags="u" class="language-js">
+// Export renommé
+export { each <u>as</u> forEach }
+
+// Ré-export (délégation)
+export * from './lib/cool-module'
+
+// ou, plus ciblé :
+export {
+  makeHigherOrder as wrap,
+  Component
+} from 'toolkit'
+                    </code></pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="importing">
+            <h2>Importer</h2>
+
+            <pre><code data-keep-tags="u" class="language-js">
+// Import intégral dans un « namespace »
+import <u>* as types</u> from '../constants/ActionTypes'
+
+// Import nommé de l’export par défaut, imports homonymes d’exports nommés
+import <u>React, { PropTypes, Component }</u> from 'react'
+
+// Ou juste un des deux modes :
+import <u>classnames</u> from 'classnames'
+import <u>{ SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE }</u> from '../constants/TodoFilters'
+
+// Import renommé
+import { makeHigherOrder <u>as</u> wrap } from 'toolkit'
+            </code></pre>
+
+            <footer>
+              <a href="http://babeljs.io/docs/learn-es2015/#modules">Détails</a> •
+              <a href="http://jsmodules.io">Comparaison CommonJS</a>
+            </footer>
+          </section>
+        </section>
+
+        <section id="decorators">
+          <h2>Décorateurs</h2>
+
+          <p>ES.Next facilite les <em>higher-order components</em> avec ce sucre syntaxique.  Aujourd’hui stade 2 (ES2018 sans doute)</p>
+
+          <pre><code data-keep-tags="u" class="language-js">
+<u>@deprecated('Use pure-functional version instead.')</u>
+class TodoItem extends Component {
+  <u>@memoize('5min')</u>
+  <u>@autobind</u>
+  getOverallCounts () {
+    // …
+  }
+
+  <u>@override</u>
+  render () {
+    // …
+  }
+}
+          </code></pre>
+
+          <footer>
+            <a href="https://github.com/wycats/javascript-decorators#readme">Détails</a> •
+            <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841">Super article</a>
+            (mais sur l’ancienne API, qui aurait dû être dans ES2016)
+          </footer>
+        </section>
+
+        <section id="further-es6">
+          <h2>Explorer ES2015+ plus avant</h2>
+
+          <p><a href="http://es6-features.org" target="_blank">ES6-Features.org</a></p>
+          <p><a href="http://es6katas.org/" target="_blank">ES6 Katas</a></p>
+          <p><a href="https://leanpub.com/understandinges6/read/" target="_blank">Understanding ES6</a></p>
+          <p><a href="http://exploringjs.com/" target="_blank">Exploring ES6</a></p>
+          <p><a href="https://hacks.mozilla.org/category/es6-in-depth/" target="_blank">ES6 In Depth</a> (MDN)</p>
+          <p><a href="https://ponyfoo.com/articles/tagged/es6-in-depth" target="_blank">ES6 In Depth</a> (Nicolás Bevacqua)</p>
+          <p><a href="http://lebab.io/" target="_blank">lebab</a> (ex-xto6)</p>
+        </section>
+
+        <section id="thanks">
+          <h1>Et maintenant,<br/>l’épisode 2 !</h1>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="plugin/highlight/prism.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    /* global Reveal */
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // width: 1150,
+      // height: 1000,
+
+      // Optional reveal.js plugins
+      dependencies: [
+        { src: 'lib/js/classList.js', condition: function () { return !document.body.classList } },
+        { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]') } },
+        { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]') } },
+        { src: 'plugin/zoom-js/zoom.js', async: true },
+        { src: 'plugin/notes/notes.js', async: true }
+      ]
+    })
+
+    </script>
+  </body>
+</html>
